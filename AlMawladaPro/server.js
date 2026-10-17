@@ -1,5 +1,5 @@
 const http=require('node:http');const fs=require('node:fs');const path=require('node:path');const {DatabaseSync}=require('node:sqlite');
-const db=new DatabaseSync(path.join(__dirname,'data','generator.sqlite'));db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
+const dbPath=process.env.MAWLADA_DB_PATH||path.join(__dirname,'data','generator.sqlite');fs.mkdirSync(path.dirname(dbPath),{recursive:true});const db=new DatabaseSync(dbPath);db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
 CREATE TABLE IF NOT EXISTS settings(key TEXT PRIMARY KEY,value TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS subscribers(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,phone TEXT DEFAULT '',address TEXT DEFAULT '',amperes INTEGER NOT NULL CHECK(amperes>0),active INTEGER NOT NULL DEFAULT 1,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE IF NOT EXISTS subscriptions(id INTEGER PRIMARY KEY AUTOINCREMENT,subscriber_id INTEGER NOT NULL REFERENCES subscribers(id),month TEXT NOT NULL,amount INTEGER NOT NULL CHECK(amount>=0),UNIQUE(subscriber_id,month));
