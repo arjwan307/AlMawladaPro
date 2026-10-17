@@ -53,5 +53,8 @@
       "createDesktopShortcut": true,
       "shortcutName": "المولدة برو"
     }
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
   }
 }
