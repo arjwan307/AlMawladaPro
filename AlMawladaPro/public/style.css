@@ -5,3 +5,7 @@
 .fold-panel>summary{font-size:20px;font-weight:700;color:#142237;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 12px}.fold-panel>summary::-webkit-details-marker{display:none}.fold-panel>summary::after{content:'▾';font-size:19px;color:#087b46;transition:transform .15s}.fold-panel:not([open])>summary::after{transform:rotate(90deg)}.fold-panel:not([open])>summary{padding-bottom:4px}.fold-panel .tablewrap{margin-top:8px}#expenseBtn{margin-top:12px}
 
 .tank-meter{height:19px;width:100%;background:#e4eaf0;border:1px solid #d3dce5;border-radius:20px;overflow:hidden;direction:rtl;margin:12px 0 5px}.tank-fill{height:100%;background:linear-gradient(90deg,#0c9757,#35c87a);border-radius:20px;transition:width .35s ease}.tank-fill.tank-low{background:linear-gradient(90deg,#c34826,#e5a13a)}.tank-fill.tank-over{background:#b77b17}.tank-label{font-size:13px;color:#536477;margin:4px 0 12px}
+
+/* Keep navigation fixed while large subscriber tables scroll independently. */
+@media(min-width:651px){html,body{height:100%;overflow:hidden}body{min-height:0}aside{height:100vh;position:sticky;top:0;overflow-y:auto;overscroll-behavior:contain}main{height:100vh;overflow-y:auto;overscroll-behavior:contain}#mainPanel .tablewrap{max-height:calc(100vh - 380px);min-height:220px;overflow:auto;overscroll-behavior:contain}#mainPanel .tablewrap thead th{position:sticky;top:0;z-index:2;background:#f1f4f8}}
+@media(max-width:900px) and (min-width:651px){#mainPanel .tablewrap{max-height:calc(100vh - 340px)}}
