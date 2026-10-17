@@ -15,5 +15,8 @@ jobs:
         run: |
           node --check AlMawladaPro/server.js
           node --check AlMawladaPro/public/app.js
+      - name: Install runtime dependencies
+        working-directory: AlMawladaPro
+        run: npm install --omit=dev --no-audit --no-fund
       - name: Integration tests
         run: node --test AlMawladaPro/tests/*.test.cjs
