@@ -1,0 +1,31 @@
+name: Build Windows Trial
+on:
+  push:
+    branches: [build/offline-commercial-v1]
+  workflow_dispatch:
+jobs:
+  windows:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run API tests
+        working-directory: AlMawladaPro
+        run: node --test tests/*.test.cjs
+      - name: Install desktop dependencies
+        working-directory: AlMawladaPro
+        run: npm install --no-audit --no-fund
+      - name: Build Windows installer and portable exe
+        working-directory: AlMawladaPro
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: npm run dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AlMawladaPro-Windows-Trial
+          path: AlMawladaPro/dist/*.exe
+          if-no-files-found: error
