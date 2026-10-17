@@ -4,6 +4,7 @@
   "private": true,
   "description": "المولدة برو - نظام إدارة اشتراكات المولدات دون إنترنت",
   "main": "electron.cjs",
+      "mobile-gateway.cjs",
   "scripts": {
     "start": "node server.js",
     "desktop": "electron .",
