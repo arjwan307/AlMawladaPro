@@ -1,4 +1,5 @@
 name: Build AlMawlada Android APK
+# Rebuild current Android diagnostic client for physical-device testing.
 on:
   push:
     branches: [build/offline-commercial-v1]
