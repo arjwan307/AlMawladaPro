@@ -1,1 +1,57 @@
-{"name":"almawladapro","version":"0.1.0","private":true,"description":"نظام إدارة اشتراكات المولدة","scripts":{"start":"node server.js","test":"node --test"},"engines":{"node":">=22"}}
+{
+  "name": "almawladapro",
+  "version": "0.2.0",
+  "private": true,
+  "description": "المولدة برو - نظام إدارة اشتراكات المولدات دون إنترنت",
+  "main": "electron.cjs",
+  "scripts": {
+    "start": "node server.js",
+    "desktop": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "dist": "electron-builder --win nsis portable"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "iq.alarjwan.almawladapro",
+    "productName": "AlMawladaPro",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron.cjs",
+      "server.js",
+      "license.js",
+      "public/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "المولدة برو"
+    }
+  }
+}
