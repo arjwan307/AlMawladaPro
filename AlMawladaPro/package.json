@@ -29,7 +29,8 @@
       "server.js",
       "license.js",
       "public/**/*",
-      "package.json"
+      "package.json",
+      "control-center/**"
     ],
     "asar": true,
     "win": {
