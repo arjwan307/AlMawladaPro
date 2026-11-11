@@ -1,3 +1,6 @@
+import arjwanControlModule from '../control-center/control-core.cjs';
+const arjwanControl=arjwanControlModule.createControl({projectId:'repo-1422186423',version:'0.1.0'});
+arjwanControl.start();
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -6,6 +9,8 @@ import {read,add} from './store.js';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../public');
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
 export const server=http.createServer(async(req,res)=>{
+ if(await arjwanControl.handle(req,res))return;try{await arjwanControl.guard(req)}catch{res.writeHead(403,{'Content-Type':'application/json'});res.end(JSON.stringify({error:'راجع ترخيص المركز؛ البيانات محفوظة'}));return}
+
  const send=(status,obj)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify(obj));};
  const url=new URL(req.url,'http://localhost');
  if(url.pathname==='/api/health')return send(200,{ok:true,app:'AlMawladaPro'});

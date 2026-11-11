@@ -1,0 +1,24 @@
+name: Control center integration
+on:
+  push:
+    branches: [feature/control-center-node-20261111]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check server syntax
+        run: node --check src/server.js
+      - name: Verify signed control policy
+        run: node --test control-center/control-core.test.cjs control-center/mawlada-startup.test.mjs
+      - name: Install existing dependencies
+        run: npm install --ignore-scripts
+      - name: Run application tests
+        run: npm test
