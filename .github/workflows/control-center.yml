@@ -17,7 +17,7 @@ jobs:
       - name: Check server syntax
         run: node --check src/server.js
       - name: Verify signed control policy
-        run: node --test control-center/control-core.test.cjs
+        run: node --test control-center/control-core.test.cjs control-center/mawlada-startup.test.mjs
       - name: Install existing dependencies
         run: npm install --ignore-scripts
       - name: Run application tests

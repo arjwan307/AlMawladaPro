@@ -1,5 +1,6 @@
 const arjwanControl=require('../control-center/control-core.cjs').createControl({projectId:'repo-1422186423',version:'0.1.0'});arjwanControl.start();
 const http=require('node:http');const fs=require('node:fs');const path=require('node:path');const {DatabaseSync}=require('node:sqlite');
+fs.mkdirSync(path.join(__dirname,'data'),{recursive:true});
 const db=new DatabaseSync(path.join(__dirname,'data','generator.sqlite'));db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
 CREATE TABLE IF NOT EXISTS settings(key TEXT PRIMARY KEY,value TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS subscribers(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,phone TEXT DEFAULT '',address TEXT DEFAULT '',amperes INTEGER NOT NULL CHECK(amperes>0),active INTEGER NOT NULL DEFAULT 1,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
